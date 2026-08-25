@@ -24,6 +24,7 @@ brew install ffmpeg yt-dlp python
 # Install Python audio dependencies & Demucs AI
 pip3 install demucs soundfile
 ```
+Demucs AI (Music Source Separation): [https://github.com/adefossez/demucs](https://github.com/adefossez/demucs)
 
 ### 2. Ensure Python Scripts are in your PATH
 If your terminal cannot locate demucs after installation, add your local Python binaries to your Zsh configuration:
