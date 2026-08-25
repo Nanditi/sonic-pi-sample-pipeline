@@ -53,6 +53,15 @@ Run the script by providing the YouTube URL, the start timestamp, the duration, 
 ```bash
 ./get_sample.sh "<YOUTUBE_URL>" <START_TIME> <DURATION_SECONDS> <OUTPUT_FILENAME>
 ```
+### 💡 Global Terminal Shortcut (Optional)
+To run this command from anywhere on your Mac without navigating to a specific folder:
+```bash
+echo 'alias get-sample="$HOME/Documents/AG Code/sonic-pi-sample-pipeline/get_sample.sh"' >> ~/.zshrc && source ~/.zshrc
+```
+Then simply run:
+```bash
+get-sample "<YOUTUBE_URL>" <START_TIME> <DURATION_SECONDS> <OUTPUT_FILENAME>
+```
 
 ### Parameters
 **YOUTUBE_URL**: The link to the source YouTube video (wrap in quotes).
@@ -66,7 +75,7 @@ Run the script by providing the YouTube URL, the start timestamp, the duration, 
 ### Example
 
 ```bash
-./get_sample.sh "https://www.youtube.com/watch?v=EXAMPLE" 00:01:15 10 parl_speaker_order
+get_sample "https://www.youtube.com/watch?v=EXAMPLE" 00:01:15 10 parl_speaker_order
 ```
 Gives a clean version of the speech sample from the youtube URL starting from 1min15sec for a duration of 10sec and stores the final sample as parl_speaker_order.wav in sonic_pi_samples folder
 
