@@ -14,7 +14,7 @@ URL=$1
 START=$2
 DURATION=$3
 FILENAME=$4
-OUT_DIR="$HOME/sonic_pi_samples"
+OUT_DIR="$HOME/Documents/Music/SFX/sonic_pi_samples"
 
 echo "🚀 Step 1: Downloading raw audio from YouTube..."
 yt-dlp -x --audio-format wav --audio-quality 0 -o "temp_raw.wav" "$URL"
