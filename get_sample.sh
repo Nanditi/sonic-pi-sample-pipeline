@@ -16,17 +16,20 @@ DURATION=$3
 FILENAME=$4
 OUT_DIR="$HOME/Documents/Music/SFX/sonic_pi_samples"
 
-echo "🚀 Step 1: Downloading raw audio from YouTube..."
-yt-dlp -x --audio-format wav --audio-quality 0 -o "temp_raw.wav" "$URL"
+echo "🚀 Step 1: Downloading full raw audio..."
+yt-dlp -x --audio-format wav --audio-quality 0 -o "temp_full.wav" "$URL"
 
-echo "🪄 Step 2: Isolating speech & stripping background music/noise..."
-demucs --two-stems=vocals temp_raw.wav
+echo "✂️ Step 2: Trimming $DURATION-second clip..."
+ffmpeg -y -ss "$START" -i temp_full.wav -t "$DURATION" -c:a pcm_s16le temp_clip.wav
 
-echo "✂️ Step 3: Trimming speech sample and saving to $OUT_DIR..."
+echo "🪄 Step 3: Isolating speech from clip with Demucs AI..."
+demucs --two-stems=vocals temp_clip.wav
+
+echo "💾 Step 4: Exporting clean sample..."
 mkdir -p "$OUT_DIR"
-ffmpeg -ss $START -i separated/htdemucs/temp_raw/vocals.wav -t $DURATION -c copy "$OUT_DIR/${FILENAME}.wav"
+ffmpeg -y -i separated/htdemucs/temp_clip/vocals.wav -ar 44100 -ac 2 -c:a pcm_s16le "$OUT_DIR/${FILENAME}.wav"
 
-echo "🧹 Step 4: Cleaning up temporary files..."
-rm -rf temp_raw.wav separated/
+echo "🧹 Step 5: Cleaning up..."
+rm -rf temp_full.wav temp_clip.wav separated/
 
 echo "✅ SUCCESS! Your clean sample is ready at: $OUT_DIR/${FILENAME}.wav"
